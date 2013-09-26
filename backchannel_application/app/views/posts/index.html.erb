@@ -1,0 +1,22 @@
+<h1>Live Feedback</h1>
+<% @posts.each do |post| %>
+    <h2> <%= link_to post.title,post %>  </h2>
+    <p> <%=post.description %> </p>
+        <%= Category.find_by_cid(post.category_id).name%>
+        <% if post.user_id %>
+         <%= post.user_id %>
+    <% end %>
+    <p> <%= link_to "Edit" , edit_post_path(post) %>
+      <%= link_to "Delete" , post ,:confirm => "Are you sure" ,:method => :delete%></p>
+<% end %>
+<p><%= link_to "Click to add a new Post", new_post_path %></p>
+
+<% if current_user %>
+    <% if current_user.is_admin == 1 %>
+        <a href="/users/show" >Show Users</a>
+    <%end%>
+<%end%>
+
+<% if current_user %>
+    <%= link_to "Click to add a new category", new_category_path %>
+<% end %>

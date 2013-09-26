@@ -1,0 +1,13 @@
+<h1>User Information</h1>
+<b><h3>Username and Password </h3></b>
+<% @users.each do |user|%>
+    <%= user.username %>
+    <% if (user.is_admin == 1) %>
+        admin
+    <% end %>
+    <%= link_to "Delete" , user ,:confirm => "Are you sure" ,:method => :delete%></p>
+
+    </br>
+    </hr>
+<%end%>
+

@@ -1,0 +1,31 @@
+<h4>Sign Up</h4>
+
+<%= form_for(@user)  do |f| %>
+    <% if @user.errors.any? %>
+        <div class="error_messages">
+          <h2>Form is invalid</h2>
+          <ul>
+            <% for message in @user.errors.full_messages %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class = "field">
+      <%= f.label :username %></br>
+      <%= f.text_field :username %>
+    </div>
+    <div class = "field">
+      <%= f.label :password %> <br/>
+      <%= f.text_field :password %>
+    </div>
+    </br>
+    <%= radio_button_tag(:is_admin, "1") %>
+    <%= label_tag(:age_admin, "admin") %>
+    <%= radio_button_tag(:is_admin, "0") %>
+    <%= label_tag(:age_non_admin, "normal user") %>
+
+    <div class = "actions">
+      <%= f.submit "Create User"%>
+    </div>
+<%end%>
