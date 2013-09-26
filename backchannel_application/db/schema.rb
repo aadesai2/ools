@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130926022305) do
+ActiveRecord::Schema.define(:version => 20130926224939) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -31,12 +31,31 @@ ActiveRecord::Schema.define(:version => 20130926022305) do
     t.string   "user_id"
   end
 
+  create_table "replies", :force => true do |t|
+    t.integer  "post_id"
+    t.string   "description"
+    t.integer  "num_likes"
+    t.string   "temp_r"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "user_id"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "password"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "is_admin"
+  end
+
+  create_table "views", :force => true do |t|
+    t.integer  "post_id"
+    t.string   "user_id"
+    t.integer  "reply_id"
+    t.integer  "like"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

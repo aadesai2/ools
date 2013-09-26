@@ -1,4 +1,23 @@
 <h1><%= @posts.title %></h1>
 <p><%= @posts.description %></p>
+
 <small><%= @posts.created_at %></small>
 <hr>
+
+<%= form_for @posts do |f| %>
+<p>
+  <%if current_user%>
+  <%= f.submit "Reply" %>
+      <%end%>
+</p>
+       <% end %>
+
+<% @reps.each do |r| %>
+    <p>
+         <%= r.description %>
+      <% if r.user_id%>
+          <%= r.user_id%>
+          <%end%>
+      <br>
+      <%= link_to "Delete" , r ,:confirm => "Are you sure" ,:method => :delete%></p>
+<% end%>

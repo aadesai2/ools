@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def show
     @posts = Post.find(params[:id])
+    @reps = Reply.find_all_by_post_id (params[:id])
   end
 
   def new
@@ -13,12 +14,12 @@ class PostsController < ApplicationController
 
   def create
     @post=Post.new(params[:post])
-
+           @post.num_likes = 0
   if(current_user)
     @post.user_id = current_user.username
   end
-    cat = Category.find name:'test1'
-    @post.category_id = cat.cid
+  #  cat = Category.find name:'test1'
+   # @post.category_id = cat.cid
     if @post.save
       redirect_to posts_path , :notice => "Your post was saved successfully."
     else
@@ -36,10 +37,11 @@ class PostsController < ApplicationController
       if(current_user.username == @post.user_id)
         edi = 1
       end
+      if(current_user.is_admin == 1)
+        edi = 1
+      end
     end
-    if(current_user.is_admin == 1)
-      edi = 1
-    end
+
     if(edi == 1)
     if @post.update_attributes(params[:post])
       redirect_to posts_path, :notice => "Your post was updated successfully"
@@ -58,11 +60,17 @@ class PostsController < ApplicationController
     if(current_user.username == @post.user_id)
        del = 1
     end
-  end
     if(current_user.is_admin == 1)
       del = 1
     end
+  end
+
     if(del == 1)
+      @rep_del = Reply.find_by_post_id(params[:id])
+        while @rep_del  do
+          @rep_del.destroy
+          @rep_del = Reply.find_by_post_id(params[:id])
+      end
     @post.destroy
     redirect_to posts_path, :notice => "Your post was updated successfully"
     else

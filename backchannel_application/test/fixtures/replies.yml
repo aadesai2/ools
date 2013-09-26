@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  post_id: 1
+  id: 1
+  description: MyString
+  num_likes: 1
+  temp_r: MyString
+
+two:
+  post_id: 1
+  id: 1
+  description: MyString
+  num_likes: 1
+  temp_r: MyString

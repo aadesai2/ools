@@ -1,15 +1,16 @@
 BackchannelApplication::Application.routes.draw do
 
-  root :to => 'posts#index'
-  resources :categories
-
+    root :to => 'posts#index'
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"
+  #  post "posts/:id" => "posts#update"
+  put "posts/:id/" => "replies#new"
 
   resources :users
   resources :sessions
   resources :posts
+    resources :replies
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
