@@ -1,12 +1,9 @@
 <h1>Live Feedback</h1>
 <% @posts.each do |post| %>
     <h2> <%= link_to post.title,post %>  </h2>
-    <%= form_for post do |f| %>
-        <p>
-          <%= f.submit "Vote" %>
-        </p>
-    <% end %>
-    <%= post.num_likes %>
+    <%= post.category_name%>
+
+    <%=  post.num_likes %>
     <p> <%=post.description %> </p>
         <% if post.user_id %>
          <%= post.user_id %>
@@ -19,6 +16,7 @@
 <% if current_user%>
 
 <p><%= link_to "Click to add a new Post", new_post_path %></p>
+    <p><%= link_to "Click to add a new Tag", new_tag_path %></p>
 <%end%>
 
 <% if current_user %>
@@ -26,4 +24,3 @@
         <a href="/users/show" >Show Users</a>
     <%end%>
 <%end%>
-

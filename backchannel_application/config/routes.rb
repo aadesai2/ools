@@ -1,11 +1,15 @@
 BackchannelApplication::Application.routes.draw do
 
+  resources :tags
+
+
     root :to => 'posts#index'
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"
-  #  post "posts/:id" => "posts#update"
-  put "posts/:id/" => "replies#new"
+   # post "posts/:id/edit" => "posts#update"
+   # put  "posts/:id/edit" => "posts#update"
+  post "posts/:id/" => "replies#new"
 
   resources :users
   resources :sessions

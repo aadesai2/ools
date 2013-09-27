@@ -1,23 +1,28 @@
 <h1><%= @posts.title %></h1>
+
+<%= form_for @posts do |f| %>
+<%= f.submit "Vote" %>
+<% end %>
 <p><%= @posts.description %></p>
 
 <small><%= @posts.created_at %></small>
 <hr>
 
-<%= form_for @posts do |f| %>
-<p>
+
   <%if current_user%>
-  <%= f.submit "Reply" %>
+      <%= link_to "Reply" , @posts ,:method => :replies_post%></p>
       <%end%>
-</p>
-       <% end %>
+
 
 <% @reps.each do |r| %>
-    <p>
          <%= r.description %>
       <% if r.user_id%>
           <%= r.user_id%>
           <%end%>
+    <%= r.num_likes%>
       <br>
+    <%= form_for r do |f| %>
+        <%= f.submit "Vote Reply" %>
+    <% end %>
       <%= link_to "Delete" , r ,:confirm => "Are you sure" ,:method => :delete%></p>
 <% end%>

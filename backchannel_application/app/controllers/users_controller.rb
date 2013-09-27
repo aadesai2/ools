@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
   def create
     @user = User.new(params[:user])
+    #@user.temp_u = params[:temp_u]
     if(params[:is_admin] == "1")
       @user.is_admin = 1
     end
