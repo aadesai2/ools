@@ -1,28 +1,61 @@
-<h1><%= @posts.title %></h1>
+<table border="1" align ="center" cellpadding ="25">
+  <tr>
+    <th><h3>User       </h3></th>
+    <th><h3>Post/Replies                            </h3></th>
+    <th><h3>Number ofVotes      </h3></th>
+    <th><h3>Posted at  </h3></th>
+    <th></th>
+ </tr>
 
-<%= form_for @posts do |f| %>
-<%= f.submit "Vote" %>
-<% end %>
-<p><%= @posts.description %></p>
-
-<small><%= @posts.created_at %></small>
-<hr>
-
-
-  <%if current_user%>
-      <%= link_to "Reply" , @posts ,:method => :replies_post%></p>
-      <%end%>
+   <tr>
+     <td>  </td>
+ <td><h3><u><%= @posts.title %></u></h3>
+   <%= @posts.description %>
+   <%= form_for @posts do |f| %>
+       <%= f.submit "Vote" %>
+   <% end %>
+ </td>
+        <td></td>
+    <td><%= @posts.created_at %> </td>
 
 
-<% @reps.each do |r| %>
-         <%= r.description %>
-      <% if r.user_id%>
-          <%= r.user_id%>
-          <%end%>
-    <%= r.num_likes%>
-      <br>
+   <td>
+
+     </td>
+     </tr>
+
+  <hr>
+
+
+  <tr colspan = 4>
+    <td>
+    <%if current_user%>
+     <h3>   <%= link_to "Reply" , @posts ,:method => :replies_post%></p>        </h3>
+    <%end%>
+    </td>
+    <hr>
+  </tr>
+
+  <tbody style="background-color: aliceblue">
+  <tr>
+
+
+    <% @reps.each do |r| %>
+        <% if r.user_id%>
+            <td>    <%= r.user_id%>      </td>
+        <%end%>
+       <td>  <%= r.description %>    </td>
+
+   <td> <%= r.num_likes%>     </td>
+        <td></td>
+    <td>
     <%= form_for r do |f| %>
         <%= f.submit "Vote Reply" %>
     <% end %>
+      </br>
       <%= link_to "Delete" , r ,:confirm => "Are you sure" ,:method => :delete%></p>
+    </td>
+        </tr>
 <% end%>
+    </tbody>
+   </table>

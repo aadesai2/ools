@@ -1,13 +1,16 @@
+
 <h1>Edit Post</h1>
+
 <%= form_for @post do |f| %>
     <% if @post.errors.any? %>
         <h2>Errors: </h2>
         <ul>
           <% @post.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
+              <font color ="red">  <li><%= message %></li>    </font>
           <% end %>
         </ul>
     <% end %>
+
     <p>
       <%= f.label :Tag %> <br/>
       <%= f.text_field :category_name%>

@@ -1,13 +1,26 @@
 <h1>User Information</h1>
-<b><h3>Username and Password </h3></b>
+
+<table border="1" align ="center" cellpadding ="25">
+  <tr>
+    <th><h3>User          </h3></th>
+    <th><h3>Type          </h3></th>
+    <th><h3>Delete        </h3></th>
+  </tr>
+
+
 <% @users.each do |user|%>
-    <%= user.username %>
+   <tr>
+   <td><h4> <%= user.username %>  </h4></td>
+     <td> <h4>
     <% if (user.is_admin == 1) %>
-        admin
+        Admin
+    <% else%>
+        Normal User
     <% end %>
-    <%= link_to "Delete" , user ,:confirm => "Are you sure" ,:method => :delete%></p>
+     </h4></td>
+   <td><h4> <%= link_to "Delete" , user ,:confirm => "Are you sure" ,:method => :delete%> </h4> </td>
+     </tr>
 
-    </br>
-    </hr>
 <%end%>
-
+     </table>
+</hr>
