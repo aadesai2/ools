@@ -1,8 +1,8 @@
 <table border="1" align ="center" cellpadding ="25">
   <tr>
-    <th><h3>User       </h3></th>
+    <th><h3>Post by      </h3></th>
     <th><h3>Post/Replies                            </h3></th>
-    <th><h3>Number ofVotes      </h3></th>
+    <th><h3>Votes      </h3></th>
     <th><h3>Posted at  </h3></th>
     <th></th>
  </tr>
@@ -15,7 +15,7 @@
        <%= f.submit "Vote" %>
    <% end %>
  </td>
-        <td></td>
+        <td><%=@posts.num_likes%></td>
     <td><%= @posts.created_at %> </td>
 
 
@@ -47,7 +47,7 @@
        <td>  <%= r.description %>    </td>
 
    <td> <%= r.num_likes%>     </td>
-        <td></td>
+        <td><%= @posts.created_at %> </td>
     <td>
     <%= form_for r do |f| %>
         <%= f.submit "Vote Reply" %>

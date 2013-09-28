@@ -1,0 +1,37 @@
+  <table border="1" align ="center" cellpadding ="25">
+    <tr>
+      <th><h3>Topic          </h3></th>
+      <th><h3>Category       </h3></th>
+      <th><h3>Votes          </h3></th>
+      <th><h3>Description    </h3></th>
+      <th><h3>Posted by      </h3></th>
+      <%if(current_user)%>
+          <th><h3>Edit           </h3></th>
+          <th><h3>Delete         </h3></th>
+      <%end%>
+    </tr>
+
+
+
+
+    <% @po.each do |post| %>
+        <tr>
+          <td> <h4> <%= link_to post.title,post %>  </h4></td>
+          <td> <h4> <%= post.category_name%>  </h4></td>
+
+          <td> <h4> <%=  post.num_likes %>   </h4></td>
+          <td> <h4> <%=post.description %> </h4></td>
+          <% if post.user_id %>
+              <td> <h4>  <%= post.user_id %>    </h4></td>
+          <% end %>
+
+          <%if(current_user)%>
+              <h4><td> <%= link_to "Edit" , edit_post_path(post) %>  </h4></td>
+              <h4><td>  <%= link_to "Delete" , post ,:confirm => "Are you sure" ,:method => :delete%>   </h4></td>
+              </tr>
+          <%end%>
+    <% end %>
+
+  </table>
+
+

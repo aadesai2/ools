@@ -14,10 +14,10 @@ class UsersController < ApplicationController
     #@user.temp_u = params[:temp_u]
     if(params[:is_admin] == "1")
       @user.is_admin = 1
-    end
-    if(params[:is_admin] == "0")
+    else
       @user.is_admin = 0
     end
+
     if @user.save
       redirect_to root_url, :notice => "Signed up!"
     else

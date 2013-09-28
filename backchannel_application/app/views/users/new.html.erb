@@ -20,11 +20,14 @@
       <%= f.text_field :temp_u %>
     </div>
     </br>
+    <%if current_user%>
+        <%if current_user.is_admin == 1%>
     <%= radio_button_tag(:is_admin, "1") %>
     <%= label_tag(:age_admin, "admin") %>
     <%= radio_button_tag(:is_admin, "0") %>
     <%= label_tag(:age_non_admin, "normal user") %>
-
+            <%end%>
+                      <%end%>
     <div class = "actions">
       <%= f.submit "Create User"%>
     </div>

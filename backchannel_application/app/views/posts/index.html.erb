@@ -15,18 +15,16 @@
 
 <table border="1" align ="center" cellpadding ="25">
   <tr>
-    <th><h3>Posts          </h3></th>
+    <th><h3>Topic          </h3></th>
     <th><h3>Category       </h3></th>
     <th><h3>Votes          </h3></th>
     <th><h3>Description    </h3></th>
-    <th><h3>Users          </h3></th>
-    <th><h3>Post Id        </h3></th>
+    <th><h3>Posted by      </h3></th>
+    <%if(current_user)%>
     <th><h3>Edit           </h3></th>
     <th><h3>Delete         </h3></th>
+        <%end%>
     </tr>
-
-
-
 
 <% @posts.each do |post| %>
       <tr>
@@ -38,11 +36,12 @@
         <% if post.user_id %>
     <td> <h4>  <%= post.user_id %>    </h4></td>
     <% end %>
-    <td> <h4>   <%= post.id %>  </h4></td>
 
+              <%if(current_user)%>
     <h4><td> <%= link_to "Edit" , edit_post_path(post) %>  </h4></td>
     <h4><td>  <%= link_to "Delete" , post ,:confirm => "Are you sure" ,:method => :delete%>   </h4></td>
           </tr>
+            <%end%>
 <% end %>
 
       </table>

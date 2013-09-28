@@ -1,9 +1,43 @@
 class PostsController < ApplicationController
-  def index
-    @posts = Post.all
-  end
 
-  def vote (postID)
+
+  def search(query , type)
+            @po = []
+    if type == "1"
+    @po = Post.find_all_by_user_id(query)
+
+
+    elsif type == "2"
+     @po = Post.find_all_by_category_name(query)
+ #     @po = Post.all
+    else
+      content = Post.all
+      content.each do |desc|
+            if /#{query}/ =~ desc.description
+              @po << desc
+        end
+
+      end
+
+    end
+
+    render :search
+
+    end
+
+
+  def index
+
+    @posts = Post.order("num_likes desc")
+
+    @users = User.all
+    if params[:commit] == 'search'
+      return  search(params[:q] , params[:admin])
+
+    end
+    end
+
+    def vote (postID)
 
     @po = Post.find(postID)
 
@@ -43,18 +77,28 @@ class PostsController < ApplicationController
   end
 
   def new
+
     @post=Post.new
     @tags = Tag.all
   end
 
   def create
+
     @post=Post.new(params[:post])
+       kk = params[:post]
            @post.num_likes = 0
+    tag = Tag.find(kk[:category_name])
+    @post.category_name = tag.name
+
+    if kk["category_name"]  == ""
+      redirect_to new_post_path() , :notice => "Tag cannot be empty"
+      #render "edit" ,  :notice => "Your post was saved successfully."
+      return
+    end
   if(current_user)
     @post.user_id = current_user.username
   end
-  #  cat = Category.find name:'test1'
-   # @post.category_id = cat.cid
+
     if @post.save
       redirect_to posts_path , :notice => "Your post was saved successfully."
     else
@@ -67,12 +111,19 @@ class PostsController < ApplicationController
   end
 
   def update
+
     if params[:commit] == 'Vote'
     return vote (params[:id])
 
     end
 
     @post = Post.find(params[:id])
+    kk = params[:post]
+    if kk["category_name"]  == ""
+      redirect_to edit_post_path(params[:id]) , :notice => "Tag cannot be empty"
+      #render "edit" ,  :notice => "Your post was saved successfully."
+      return
+    end
     if (current_user)
       if(current_user.username == @post.user_id)
         edi = 1
@@ -119,5 +170,6 @@ class PostsController < ApplicationController
     del = 0
   end
 
-end
 
+
+                          end

@@ -2,6 +2,7 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
+
     @tags = Tag.all
       if current_user
         @user = User.find_by_username(current_user.username)

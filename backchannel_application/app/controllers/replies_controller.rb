@@ -78,6 +78,7 @@ class RepliesController < ApplicationController
       return votereply (params[:id])
     end
     @reply = Reply.find(params[:id])
+
     if (current_user)
       if(current_user.username == @reply.user_id)
         edi = 1

@@ -12,11 +12,10 @@
         </ul>
     <% end %>
 
-    <p>
-      <%= f.label :tag_name %> <br/>
-      <%= f.text_field :category_name%>
-    </p>
 
+    <p>
+    <%= f.collection_select :category_name, @tags, :id, :name %>
+    </p>
     <p>
       <%= f.label :title %> <br/>
       <%= f.text_field :title%>

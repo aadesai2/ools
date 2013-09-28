@@ -10,11 +10,14 @@ BackchannelApplication::Application.routes.draw do
    # post "posts/:id/edit" => "posts#update"
    # put  "posts/:id/edit" => "posts#update"
   post "posts/:id/" => "replies#new"
+ # post "/posts" => "posts/index"
+  match ":rest" => "posts#index", :constraints => { :rest => /.search./ }
 
   resources :users
   resources :sessions
   resources :posts
     resources :replies
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
